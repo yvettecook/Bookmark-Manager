@@ -7,13 +7,16 @@ DataMapper.setup(:default, "postgres://localhost/bookmark_manager_#{env}")
 
 require './lib/link'
 
-DataMapper.finalize
-
-DataMapper.auto_upgrade! 
+	DataMapper.finalize
+	DataMapper.auto_upgrade! 
 
 class BookmarkManager < Sinatra::Base
+
+set :views, Proc.new { File.join(root, "..", "views")}
+
   get '/' do
-    'Hello BookmarkManager!'
+    @links = Link.all
+    erb :index
   end
 
   # start the server if ruby file executed directly
