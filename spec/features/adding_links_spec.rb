@@ -12,7 +12,7 @@ feature "User adds a new link" do
 		expect(link.title).to eq("Makers Academy")
 	end
 
-	def add_link(url, title)
+	def add_link(url, title, tags = [])
 		within('#new-link') do
 			fill_in 'url', :with => url
 			fill_in 'title', :with => title
