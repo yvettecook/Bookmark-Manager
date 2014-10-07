@@ -1,6 +1,6 @@
 ENV["RACK_ENV"] = 'test'
 
-require 'router'
+require './app/router'
 require 'user'
 require 'database_cleaner'
 require 'capybara/rspec'
