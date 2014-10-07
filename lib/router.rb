@@ -8,11 +8,14 @@ DataMapper.setup(:default, "postgres://localhost/bookmark_manager_#{env}")
 require './lib/link'
 require './lib/user'
 require './lib/tag'
+require './app/helpers'
+
 
 	DataMapper.finalize
 	DataMapper.auto_upgrade! 
 
 class BookmarkManager < Sinatra::Base
+
 
   set :views, Proc.new { File.join(root, "..", "views")}
   enable :sessions
@@ -52,14 +55,9 @@ class BookmarkManager < Sinatra::Base
     end
 
 
+
+
     # start the server if ruby file executed directly
     run! if app_file == $0
-
-  
-  helpers do
-    def current_user
-      @current_user ||=User.get(session[:user_id]) if session[:user_id]
-    end
-  end 
 
 end
