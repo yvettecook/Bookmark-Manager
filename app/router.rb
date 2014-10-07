@@ -8,7 +8,7 @@ require_relative 'helpers/pre-runner.rb'
 
 class BookmarkManager < Sinatra::Base
 
-  include FunkyDamn
+  include FunkyDamnHelpers
 
   set :views, Proc.new { File.join(root, "..", "app", "views")}
   enable :sessions
