@@ -1,23 +1,16 @@
 require 'sinatra/base'
 require 'data_mapper'
-
-env = ENV["RACK_ENV"] || "development"
-
-DataMapper.setup(:default, "postgres://localhost/bookmark_manager_#{env}")
-
 require './lib/link'
 require './lib/user'
 require './lib/tag'
-require './app/helpers'
-
-
-	DataMapper.finalize
-	DataMapper.auto_upgrade! 
+require_relative 'helpers/helpers.rb'
+require_relative 'helpers/pre-runner.rb'
 
 class BookmarkManager < Sinatra::Base
 
+  include FunkyDamn
 
-  set :views, Proc.new { File.join(root, "..","app", "views")}
+  set :views, Proc.new { File.join(root, "..", "app", "views")}
   enable :sessions
   set :session_secret, 'super secret'
 
