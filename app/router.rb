@@ -17,7 +17,7 @@ require './app/helpers'
 class BookmarkManager < Sinatra::Base
 
 
-  set :views, Proc.new { File.join(root, "..", "views")}
+  set :views, Proc.new { File.join(root, "..","app", "views")}
   enable :sessions
   set :session_secret, 'super secret'
 
