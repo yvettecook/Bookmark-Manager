@@ -7,7 +7,7 @@ require 'capybara/rspec'
 
 
 
-Capybara.app = BookmarkManager
+Capybara.app = Sinatra::Application.new
 
 
 RSpec.configure do |config|

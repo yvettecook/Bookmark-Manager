@@ -1,15 +1,13 @@
-require 'sinatra/base'
+require 'sinatra'
 require 'data_mapper'
 require 'rack-flash'
 require './lib/link'
 require './lib/user'
 require './lib/tag'
-require_relative 'helpers/helpers.rb'
-require_relative 'helpers/pre-runner.rb'
+require_relative 'helpers/helpers'
+require_relative 'data_mapper_setup'
 
-class BookmarkManager < Sinatra::Base
 
-  include FunkyDamnHelpers
 
   set :views, Proc.new { File.join(root, "..", "app", "views")}
   enable :sessions
@@ -19,13 +17,11 @@ class BookmarkManager < Sinatra::Base
 
   set :session_secret, 'super secret'
 
-  require_relative 'controllers/application'
-
     get '/' do
       @links = Link.all
       @users = User.all
       erb :index
-     end
+    end
 
     post '/links' do
     	url = params["url"]
@@ -84,7 +80,4 @@ class BookmarkManager < Sinatra::Base
     end
 
 
-    # start the server if ruby file executed directly
-    run! if app_file == $0
 
-end
