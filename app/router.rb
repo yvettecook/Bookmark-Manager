@@ -15,14 +15,17 @@ class BookmarkManager < Sinatra::Base
   enable :sessions
 
   use Rack::Flash
+  use Rack::MethodOverride
 
   set :session_secret, 'super secret'
+
+  require_relative 'controllers/application'
 
     get '/' do
       @links = Link.all
       @users = User.all
       erb :index
-    end
+     end
 
     post '/links' do
     	url = params["url"]
@@ -58,11 +61,11 @@ class BookmarkManager < Sinatra::Base
       end
     end
 
-    get '/sessions/new' do
+    get '/sessions/new' do 
       erb :"sessions/new"
     end
 
-    post '/sessions' do
+    post '/sessions' do 
       email, password = params[:email], params[:password]
       user = User.authenticate(email, password)
       if user
@@ -72,6 +75,12 @@ class BookmarkManager < Sinatra::Base
         flash[:errors] = ["The email or password is incorrect"]
         erb :"sessions/new"
       end
+    end
+
+    delete '/sessions' do
+      flash[:notice] = "Good bye!"
+      session[:user_id] = nil
+      redirect to('/')
     end
 
 
