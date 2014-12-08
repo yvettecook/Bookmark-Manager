@@ -16,3 +16,13 @@ The website has the following options:
 * Integration testing (Capybara)
 * Relational databases 
 * Security considerations
+
+### Tools:
+
+* Ruby
+* RSpec
+* Cucumber
+* Capybara
+* PostgresQL with Data-Mapper and BCrypt
+* Sinatra
+
